@@ -1,5 +1,5 @@
 {
-  "name": "@booking/ui",
+  "name": "@booking/public",
   "version": "0.0.0",
   "private": true,
   "exports": {
@@ -11,6 +11,7 @@
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
+    "@booking/ui": "workspace:*",
     "@booking/tailwind-config": "workspace:*",
     "@booking/eslint-config": "workspace:*",
     "@booking/typescript-config": "workspace:*",

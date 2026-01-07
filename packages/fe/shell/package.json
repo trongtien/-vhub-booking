@@ -17,6 +17,7 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@booking/tailwind-config": "workspace:*",
     "@booking/eslint-config": "workspace:*",
     "@booking/typescript-config": "workspace:*",
     "@types/node": "^22.15.3",
