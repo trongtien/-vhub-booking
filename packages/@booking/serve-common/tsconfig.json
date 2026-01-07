@@ -1,0 +1,6 @@
+{
+  "extends": "@booking/typescript-config/nest.json",
+  "exclude": [
+    "node_modules"
+  ]
+}
