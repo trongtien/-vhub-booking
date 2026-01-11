@@ -1,4 +1,5 @@
 import "jest-extended";
+import knex from "knex";
 
 // Global test setup
 beforeAll(() => {
