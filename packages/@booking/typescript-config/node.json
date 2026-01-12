@@ -2,8 +2,12 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./base.json",
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
-    "module": "commonjs",
-    "moduleResolution": "node"
+    "module": "node16",
+    "moduleResolution": "node16",
+    "target": "es2022",
+    "sourceMap": true,
+    "esModuleInterop": true,       
+    "skipLibCheck": true,         
+    "incremental": true
   }
 }

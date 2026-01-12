@@ -1,14 +1,21 @@
+// enums
 export * from "./enums/error.enum";
 export * from "./enums/logger.enum";
+
+// helper
 export * from "./helpers/context-request.helper";
 export * from "./helpers/error.helper";
 export * from "./helpers/http-response.helper";
 export * from "./helpers/logger.helper";
 export * from "./helpers/result.helper";
+
+// types
 export * from "./types/context-request.type";
 export * from "./types/http-response.type";
 export * from "./types/logger.type";
 export * from "./types/repositories-query.type";
+
+// infra
 export * from "./infra/cache/redis.cache";
 export * from "./infra/knex-connection/knex.config";
 export * from "./infra/knex-connection/knex.health";
