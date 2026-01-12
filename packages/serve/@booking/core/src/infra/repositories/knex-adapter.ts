@@ -21,6 +21,7 @@ export class KnexAdapter {
       case "SELECT":
         this.toAstSelect();
         return;
+
       case "AND":
         this.toAstSelect();
         return;

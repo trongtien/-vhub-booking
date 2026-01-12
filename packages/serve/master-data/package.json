@@ -1,16 +1,16 @@
 {
-  "name": "@booking/serve-core",
+  "name": "@booking/serve-master",
   "version": "0.0.1",
   "description": "",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
   "exports": {
-    ".": "./dist/index.js"
+    "./*": "./src/*.ts"
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "scripts": {
+    "db:migrate": "../../@booking/core/db.sh migrate",
+    "db:rollback": "../../@booking/core/db.sh rollback",
     "build": "tsc -p tsconfig.json",
     "lint": "eslint . --max-warnings 0",
     "generate:component": "turbo gen react-component",
@@ -19,14 +19,16 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
+  "dependencies": {
+    "@booking/serve-core": "workspace:*"
+  },
   "devDependencies": {
     "@booking/eslint-config": "workspace:*",
     "@booking/jest-config": "workspace:*",
-    "@booking/typescript-config": "workspace:*"
-  },
-  "dependencies": {
-    "ioredis": "^5.9.1",
-    "knex": "^3.1.0",
-    "winston": "^3.19.0"
+    "@booking/typescript-config": "workspace:*",
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "jest-extended": "^4.0.2",
+    "ts-jest": "^29.1.2"
   }
 }
