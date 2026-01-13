@@ -1,11 +1,14 @@
 import knex, { Knex } from 'knex';
 import { createKnexConfig } from './knex.config';
+import { ConnectionConfig } from '../../types';
 
 let knexInstance: Knex;
 
-export function getKnex(): Knex {
+export function registerConnectionKnex(config: Partial<ConnectionConfig>): Knex {
     if (!knexInstance) {
-        knexInstance = knex(createKnexConfig());
+        const cf  = createKnexConfig(config)
+        knexInstance = knex(cf);
     }
+
     return knexInstance;
 }

@@ -1,28 +1,37 @@
-import { Knex } from 'knex';
+import { Knex } from "knex";
+import { ConnectionConfig } from "../../types";
 
-export function createKnexConfig(): Knex.Config {
-  return {
-    client: 'pg',
-    connection: {
-      host: process.env.DB_HOST,
-      port: Number(process.env.DB_PORT),
-      database: process.env.DB_NAME,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      ssl:
-        process.env.DB_SSL === 'true'
-          ? { rejectUnauthorized: false }
-          : false,
-    },
-    pool: {
-      min: Number(process.env.DB_POOL_MIN ?? 2),
-      max: Number(process.env.DB_POOL_MAX ?? 10),
-      afterCreate: (conn: any, done: any) => {
-        conn.query('SET timezone="UTC";', done);
-      },
-    },
-    migrations: {
-      tableName: 'knex_migrations',
-    },
-  };
+export function createKnexConfig(config: Partial<ConnectionConfig>): Knex.Config {
+    const {
+        host,
+        port,
+        database,
+        user,
+        password,
+        ssl,
+        minPool = 2,
+        maxPool = 10,
+        tableNameMigration = "knex_migrations"
+    } = config;
+    return {
+        client: "pg",
+        connection: {
+            host: host,
+            port: Number(port),
+            database: database,
+            user: user,
+            password: password,
+            ssl: ssl === "true" ? { rejectUnauthorized: false } : false,
+        },
+        pool: {
+            min: Number(minPool ?? 2),
+            max: Number(maxPool ?? 10),
+            afterCreate: (conn: any, done: any) => {
+                conn.query('SET timezone="UTC";', done);
+            },
+        },
+        migrations: {
+            tableName: tableNameMigration,
+        },
+    };
 }

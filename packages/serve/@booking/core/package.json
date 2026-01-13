@@ -23,7 +23,8 @@
   "devDependencies": {
     "@booking/eslint-config": "workspace:*",
     "@booking/jest-config": "workspace:*",
-    "@booking/typescript-config": "workspace:*"
+    "@booking/typescript-config": "workspace:*",
+    "zod": "^4.2.1"
   },
   "dependencies": {
     "ioredis": "^5.9.1",

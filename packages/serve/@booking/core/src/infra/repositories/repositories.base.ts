@@ -48,4 +48,8 @@ export abstract class BaseRepository<
       await this.knex(this.tableName).where({ id }).delete();
     });
   }
+
+  async transaction<T>(fn: (trx: Knex.Transaction) => Promise<T>): Promise<T> {
+      return this.knex.transaction(fn)
+  }
 }
