@@ -1,4 +1,4 @@
-import knex from "knex";
+import { knex } from "@booking/serve-knex-cli";
 import console from "node:console";
 import { KnexAdapter } from "./knex-adapter";
 import { QueryCompareNode, QueryJoinNode, QuerySelect } from "../../types";
@@ -16,13 +16,6 @@ describe("KnexAdapter", () => {
     field: "id",
     operator: "!=",
     value: "1111111111111111111111111111",
-  };
-
-  const specNodeJoin: QueryJoinNode = {
-    type: "JOIN",
-    kind: "inner",
-    on: ["user.province_code", "province.code"],
-    table: "user",
   };
 
   it("Should generator to select ast", () => {

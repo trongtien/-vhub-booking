@@ -1,4 +1,4 @@
-import type { Knex } from "knex";
+import type { Knex } from "@booking/serve-knex-cli";
 import { ExecuteErrorMapper } from "./execute-error-mapper";
 import { DatabaseError } from "./database-error";
 

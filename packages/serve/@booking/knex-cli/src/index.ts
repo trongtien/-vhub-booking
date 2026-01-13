@@ -1,4 +1,3 @@
-// Library API - Functions for programmatic use
 export * from './type'
 export * from './register-config'
 export * from './health-check'

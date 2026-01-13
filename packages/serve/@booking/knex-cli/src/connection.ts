@@ -4,7 +4,7 @@ import { ConnectionConfig } from './type';
 
 let connectionInstance: Knex;
 
-export function registerConnection(config: Partial<ConnectionConfig>, logger?: any): Knex {
+function registerConnection(config: Partial<ConnectionConfig>, logger?: any): Knex {
     if (!connectionInstance) {
         try {
             const cf = registerConfig(config)
@@ -16,4 +16,9 @@ export function registerConnection(config: Partial<ConnectionConfig>, logger?: a
     }
 
     return connectionInstance;
+}
+
+export {
+    knex,
+    registerConnection
 }

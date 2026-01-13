@@ -1,11 +1,9 @@
-import { Knex } from "knex";
 import type {
   IRegisterKnexAdapter,
   QueryAndNode,
   QueryCompareNode,
   QueryJoinNode,
   QuerySelect,
-  QueryTypeNode,
 } from "../../types";
 
 export class KnexAdapter {
