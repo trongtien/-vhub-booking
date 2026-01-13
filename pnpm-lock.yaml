@@ -265,6 +265,22 @@ importers:
         specifier: ^4.2.1
         version: 4.2.1
 
+  packages/serve/@booking/knex-cli:
+    dependencies:
+      knex:
+        specifier: ^3.1.0
+        version: 3.1.0(pg@8.16.3)
+    devDependencies:
+      '@booking/eslint-config':
+        specifier: workspace:*
+        version: link:../../../@booking/eslint-config
+      '@booking/jest-config':
+        specifier: workspace:*
+        version: link:../../../@booking/jest-config
+      '@booking/typescript-config':
+        specifier: workspace:*
+        version: link:../../../@booking/typescript-config
+
   packages/serve/@booking/master-data:
     dependencies:
       '@booking/serve-core':

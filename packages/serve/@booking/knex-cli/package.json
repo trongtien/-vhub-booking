@@ -1,0 +1,31 @@
+{
+  "name": "@booking/serve-knex-cli",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "lint": "eslint . --max-warnings 0",
+    "generate:component": "turbo gen react-component",
+    "check-types": "tsc --noEmit",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "@booking/eslint-config": "workspace:*",
+    "@booking/jest-config": "workspace:*",
+    "@booking/typescript-config": "workspace:*"
+  },
+  "dependencies": {
+    "knex": "^3.1.0"
+  }
+}
