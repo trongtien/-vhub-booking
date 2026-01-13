@@ -25,10 +25,10 @@
     "@booking/jest-config": "workspace:*",
     "@booking/typescript-config": "workspace:*",
     "@types/pg": "^8.16.0",
+    "@booking/serve-knex-cli": "workspace:*",
     "zod": "^4.2.1"
   },
   "dependencies": {
-    "@booking/serve-knex-cli": "workspace:*",
     "ioredis": "^5.9.1",
     "pg": "^8.16.3",
     "winston": "^3.19.0"

@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TraceInterceptor } from './interceptor/trace.interceptor';
-import { LoggerAdapter, registerConnectionKnex } from '@booking/serve-core';
+import { LoggerAdapter } from '@booking/serve-core';
+import { registerConnection } from '@booking/serve-knex-cli';
 import { LogHttpInterceptor } from './interceptor/log-http.interceptor';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_DATABASE_CONNECTION } from './utils/symbol-provider';
@@ -28,7 +29,7 @@ import { AppMasterDataModule } from './app-mater-data/app-master-data.module';
         {
             provide: APP_DATABASE_CONNECTION,
             inject: [ConfigService, LoggerAdapter],
-            useFactory: (config: ConfigService, logger: LoggerAdapter) => registerConnectionKnex({
+            useFactory: (config: ConfigService, logger: LoggerAdapter) => registerConnection({
                 database: config.get<string>('databaseConfig.database'),
                 host: config.get<string>('databaseConfig.host'),
                 port: config.get<number>('databaseConfig.port'),

@@ -230,9 +230,6 @@ importers:
 
   packages/serve/@booking/core:
     dependencies:
-      '@booking/serve-knex-cli':
-        specifier: workspace:*
-        version: link:../knex-cli
       ioredis:
         specifier: ^5.9.1
         version: 5.9.1
@@ -249,6 +246,9 @@ importers:
       '@booking/jest-config':
         specifier: workspace:*
         version: link:../../../@booking/jest-config
+      '@booking/serve-knex-cli':
+        specifier: workspace:*
+        version: link:../knex-cli
       '@booking/typescript-config':
         specifier: workspace:*
         version: link:../../../@booking/typescript-config
@@ -311,6 +311,9 @@ importers:
       '@booking/serve-core':
         specifier: workspace:*
         version: link:../@booking/core
+      '@booking/serve-knex-cli':
+        specifier: workspace:*
+        version: link:../@booking/knex-cli
       '@nestjs/common':
         specifier: ^11.1.11
         version: 11.1.11(reflect-metadata@0.1.14)(rxjs@7.8.2)
