@@ -1,4 +1,4 @@
-import { IProvinceRepository } from "../../../domain/province/province.repository";
+import { IProvinceRepository } from "@/domain/province/province.repository";
 
 
 export class GetProvinceUseCase {
