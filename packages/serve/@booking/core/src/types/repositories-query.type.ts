@@ -1,4 +1,4 @@
-import type { Knex } from "knex";
+import type { Knex } from "@booking/serve-knex-cli";
 
 export type QueryOperator = "=" | "!=" | ">" | "<" | "LIKE";
 
