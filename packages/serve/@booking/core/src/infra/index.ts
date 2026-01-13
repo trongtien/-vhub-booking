@@ -1,9 +1,5 @@
 export * from "./cache/redis.cache";
 
-export * from "./knex-connection/knex.config";
-export * from "./knex-connection/knex.health";
-export * from "./knex-connection/knex.instance";
-
 export * from "./redis-connection/redis.client";
 export * from "./redis-connection/redis.health";
 
