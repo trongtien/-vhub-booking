@@ -29,3 +29,9 @@ export * from "./infra/redis-connection/redis.health";
 export * from "./infra/repositories/repositories.base";
 export * from "./infra/repositories/knex-adapter";
 export * from "./infra/repositories/specification.base";
+
+// CLI
+export { default as migrate } from "./cli/knex.migrate";
+export { default as rollback } from "./cli/knex.rollback";
+export { default as registerKnexConfig } from "./cli/knex.register-config";
+export type { MigrateConfig } from "./cli/knex.register-config";

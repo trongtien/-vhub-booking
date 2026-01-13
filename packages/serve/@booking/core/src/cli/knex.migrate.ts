@@ -11,8 +11,9 @@ type MigrateConfig = {
   folder: string;
 };
 
-export default async function migrate(config: MigrateConfig) {
-  const cf = await registerConfig(config);
+export default async function migrate(config: Partial<MigrateConfig>) {
+  await validateConfig(config);
+  const cf = await registerConfig(config as MigrateConfig);
   const dbClient = knex(cf);
 
   try {
@@ -27,7 +28,7 @@ export default async function migrate(config: MigrateConfig) {
   }
 }
 
-async function validateConfig(config: MigrateConfig) {
+async function validateConfig(config: Partial<MigrateConfig>) {
   const { host, port, user, password, database, folder } = config;
   const errorValid = new Map<string, string>();
 

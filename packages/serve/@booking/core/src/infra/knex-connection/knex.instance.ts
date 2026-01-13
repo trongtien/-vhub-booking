@@ -5,14 +5,14 @@ import { LoggerAdapter } from '../../helpers';
 
 let knexInstance: Knex;
 
-export function registerConnectionKnex(config: Partial<ConnectionConfig>, logger: LoggerAdapter): Knex {
+export function registerConnectionKnex(config: Partial<ConnectionConfig>, logger?: LoggerAdapter): Knex {
     if (!knexInstance) {
         try {
             const cf = createKnexConfig(config)
             knexInstance = knex(cf);
-            logger.info('==> Knex instance created successfully');
+            logger?.info('==> Knex instance created successfully');
         } catch (error) {
-            logger.error('==> Error creating Knex instance', { error });
+            logger?.error('==> Error creating Knex instance', { error });
         }
     }
 

@@ -5,4 +5,5 @@ import { ProvinceModule } from "./province/province.module";
 @Module({
     imports: [ProvinceModule],
 })
-export class AppMasterDataModule {}
+export class AppMasterDataModule {
+}

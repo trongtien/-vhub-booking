@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TraceInterceptor } from './interceptor/trace.interceptor';
-import { LoggerAdapter, registerConnectionKnex, schemaConfig, getCwdRoot } from '@booking/serve-core';
+import { LoggerAdapter, registerConnectionKnex } from '@booking/serve-core';
 import { LogHttpInterceptor } from './interceptor/log-http.interceptor';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_DATABASE_CONNECTION } from './utils/symbol-provider';
 import { appConfig, databaseConfig } from './utils/config';
+import { AppMasterDataModule } from './app-mater-data/app-master-data.module';
 
 @Module({
     imports: [
@@ -17,6 +18,7 @@ import { appConfig, databaseConfig } from './utils/config';
             ignoreEnvFile: false,
             load: [appConfig, databaseConfig],
         }),
+        AppMasterDataModule
     ],
     providers: [
         {
