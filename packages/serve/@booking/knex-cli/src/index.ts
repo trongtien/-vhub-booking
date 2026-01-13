@@ -1,13 +1,15 @@
+// Library API - Functions for programmatic use
 export * from './type'
 export * from './register-config'
 export * from './health-check'
 export * from './connection'
-export * from './cli-common'
-export * from './rollback'
-export * from './migrate'
 export * from './validate-config'
-export * from './generator-template-migrate'
 
-export { default as migrate } from './cli-migrate'
-export { default as rollback } from './cli-rollback'
-export { default as makeMigration } from './cli-make-file'
+// Core functions without CLI overhead
+export { default as migrate } from './migrate'
+export { default as rollback } from './rollback'
+export { default as makeMigration } from './generator-template-migrate'
+
+// Utilities
+export * from './cli-common'
+export * from './env-object'

@@ -11,9 +11,9 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "lint": "eslint . --max-warnings 0",
-    "migrate": "ts-node -r tsconfig-paths/register ../knex-cli/src/cli-migrate.ts --folder=./migrations --path-env=../../../../.env.local",
-    "migrate:rollback": "ts-node -r tsconfig-paths/register ../knex-cli/src/cli-rollback.ts --folder=./migrations --path-env=../../../../.env.local",
-    "migrate:make": "ts-node -r tsconfig-paths/register ../knex-cli/src/cli-make-file.ts --path=./migrations",
+    "migrate": "knex-cli-migrate --folder=./migrations --path-env=../../../../.env.local",
+    "migrate:rollback": "knex-cli-rollback --folder=./migrations --path-env=../../../../.env.local",
+    "migrate:make": "knex-cli-make --path=./migrations",
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit",
     "test": "jest",
