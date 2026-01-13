@@ -1,49 +1,25 @@
-import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { parseArgs } from './cli-common';
+import makeMigration from './generator-template-migrate';
 
-const migrationName = process.argv[2];
+export default () => {
+  if (require.main !== module) return;
 
-if (!migrationName) {
-  console.error('❌ Error: Migration name is required');
-  console.log('Usage: pnpm migrate:make <migration_name>');
-  console.log('Example: pnpm migrate:make create_users_table');
-  process.exit(1);
-}
+  const args = parseArgs(process.argv.slice(2));
 
-const timestamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0]!.replace('T', '_');
-const fileName = `${timestamp}_${migrationName}.ts`;
-const filePath = resolve(__dirname, './migrations', fileName);
+  if (!args.name) {
+    console.error('❌ Error: Migration name is required');
+    console.log('Usage: ts-node cli-make-file.ts --name=<migration_name> --path=<migrations_folder>');
+    console.log('Example: ts-node cli-make-file.ts --name="create_users_table" --path="./migrations"');
+    process.exit(1);
+  }
 
-const template = `import { Knex } from 'knex';
+  if (!args.path) {
+    console.error('❌ Error: Migrations path is required');
+    console.log('Usage: ts-node cli-make-file.ts --name=<migration_name> --path=<migrations_folder>');
+    process.exit(1);
+  }
 
-export async function up(knex: Knex): Promise<void> {
-    console.log('==> Run migration ${migrationName}');
-    
-    // TODO: Add your migration logic here
-    // Example:
-    // await knex.schema.createTable('table_name', (table) => {
-    //     table.increments('id').primary();
-    //     table.string('name').notNullable();
-    //     table.timestamps(true, true);
-    // });
-    
-    console.log('==> Migration ${migrationName} completed');
-}
-
-export async function down(knex: Knex): Promise<void> {
-    // TODO: Add your rollback logic here
-    // Example:
-    // await knex.schema.dropTableIfExists('table_name');
-    
-    console.log('==> Rollback ${migrationName} completed');
-}
-`;
-
-try {
-  writeFileSync(filePath, template, 'utf-8');
-  console.log(`✅ Created migration: ${fileName}`);
-  console.log(`📁 Location: migrations/${fileName}`);
-} catch (error) {
-  console.error('❌ Error creating migration file:', error);
-  process.exit(1);
+  const migrationsFolder = resolve(process.cwd(), args.path);
+  makeMigration(args.name, migrationsFolder);
 }

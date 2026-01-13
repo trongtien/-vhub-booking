@@ -286,6 +286,9 @@ importers:
       '@booking/serve-core':
         specifier: workspace:*
         version: link:../core
+      '@booking/serve-knex-cli':
+        specifier: workspace:*
+        version: link:../knex-cli
     devDependencies:
       '@booking/eslint-config':
         specifier: workspace:*
