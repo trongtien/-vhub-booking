@@ -12,6 +12,7 @@
     "build": "tsc -p tsconfig.json",
     "lint": "eslint . --max-warnings 0",
     "migrate": "ts-node -r tsconfig-paths/register src/cli/migrate.ts",
+    "migrate:make": "ts-node -r tsconfig-paths/register src/cli/make-migration.ts",
     "migrate:rollback": "ts-node -r tsconfig-paths/register src/cli/rollback.ts",
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit",
