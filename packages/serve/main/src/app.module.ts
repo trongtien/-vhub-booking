@@ -12,26 +12,27 @@ import { appConfig, databaseConfig } from './utils/config';
         ConfigModule.forRoot({
             isGlobal: true,
             cache: true,
-            envFilePath: [getCwdRoot() + '.env.local'],
-            validationSchema: schemaConfig,
+            envFilePath: ['../../../.env.local', '.env.local'],
+            expandVariables: true,
+            ignoreEnvFile: false,
             load: [appConfig, databaseConfig],
         }),
     ],
     providers: [
         {
+            provide: LoggerAdapter,
+            useFactory: () => new LoggerAdapter(LoggerAdapter.TERMINAL_LOGGER),
+        },
+        {
             provide: APP_DATABASE_CONNECTION,
-            inject: [ConfigService],
-            useFactory: (config: ConfigService) => registerConnectionKnex({
+            inject: [ConfigService, LoggerAdapter],
+            useFactory: (config: ConfigService, logger: LoggerAdapter) => registerConnectionKnex({
                 database: config.get<string>('databaseConfig.database'),
                 host: config.get<string>('databaseConfig.host'),
                 port: config.get<number>('databaseConfig.port'),
                 user: config.get<string>('databaseConfig.user'),
                 password: config.get<string>('databaseConfig.password'),
-            }),
-        },
-        {
-            provide: LoggerAdapter,
-            useFactory: () => new LoggerAdapter(LoggerAdapter.TERMINAL_LOGGER),
+            }, logger),
         },
         {
             provide: APP_INTERCEPTOR,

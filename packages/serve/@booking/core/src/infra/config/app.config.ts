@@ -12,9 +12,9 @@ export type AppConfig = z.infer<typeof appConfigSchema>;
 
 export function loadAppConfig(env: NodeJS.ProcessEnv): AppConfig {
     return appConfigSchema.parse({
-        APP_NODE_ENV: env.NODE_ENV,
+        APP_NODE_ENV: env.APP_NODE_ENV,
         APP_HOST: env.APP_HOST,
-        APP_PORT: Number(env.APP_PORT),
+        APP_PORT: env.APP_PORT,
         APP_VERSION: env.APP_VERSION,
         APP_TIMEZONE: env.APP_TIMEZONE,
     });

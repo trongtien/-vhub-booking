@@ -16,12 +16,12 @@ export type DatabaseConfig = z.infer<typeof databaseConfigSchema>
 export function loadDatabaseConfig(env: NodeJS.ProcessEnv): DatabaseConfig {
   return databaseConfigSchema.parse({
     DATABASE_HOST: env.DATABASE_HOST,
-    DATABASE_PORT: Number(env.DATABASE_PORT),
+    DATABASE_PORT: env.DATABASE_PORT,
     DATABASE_NAME: env.DATABASE_NAME,
     DATABASE_USERNAME: env.DATABASE_USERNAME,
     DATABASE_PASSWORD: env.DATABASE_PASSWORD,
-    DATABASE_POOL_MIN: Number(env.DATABASE_POOL_MIN),
-    DATABASE_POOL_MAX: Number(env.DATABASE_POOL_MAX),
+    DATABASE_POOL_MIN: env.DATABASE_POOL_MIN ? Number(env.DATABASE_POOL_MIN) : undefined,
+    DATABASE_POOL_MAX: env.DATABASE_POOL_MAX ? Number(env.DATABASE_POOL_MAX) : undefined,
     DATABASE_POOL_SSL: env.DATABASE_POOL_SSL,
   });
 }
