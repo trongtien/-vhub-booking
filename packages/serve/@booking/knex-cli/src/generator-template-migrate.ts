@@ -12,7 +12,7 @@ export default function makeMigration(migrationName: string, migrationsFolder: s
   const filePath = resolve(migrationsFolder, fileName);
 
   const template = `
-import { Knex } from '@booking/serve-knex-cli';
+import type { Knex } from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
     console.log('==> Run migration ${migrationName}');

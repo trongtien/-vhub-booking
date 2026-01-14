@@ -5,7 +5,10 @@ import type { MigrateConfig } from "./type";
 
 export default async function rollback(config: MigrateConfig) {
   console.log("==> Run rollback database");
-  const cf = await registerConfig(config);
+  const cf = await registerConfig({
+    ...config,
+    tableNameMigration: config.tableName,
+  });
   const dbClient = knex(cf);
   try {
     await dbClient.migrate.rollback(undefined, true);

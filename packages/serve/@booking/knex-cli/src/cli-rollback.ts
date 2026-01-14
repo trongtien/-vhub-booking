@@ -24,6 +24,7 @@ export default () => {
     password: args.password || process.env.DATABASE_PASSWORD || '',
     database: args.database || process.env.DATABASE_NAME || '',
     folder: args.folder ? resolve(process.cwd(), args.folder) : resolve(process.cwd(), './migrations'),
+    tableName: args.tableName || args['table-name'],
   };
 
   console.log('==> Running rollback with config:', {

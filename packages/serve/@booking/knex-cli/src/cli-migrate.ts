@@ -12,7 +12,6 @@ export default () => {
 
   if (args['path-env']) {
     const envPath = resolve(process.cwd(), args['path-env']);
-    console.log(`==> Loading environment from: ${envPath}`);
     envObject(envPath);
   }
 
@@ -23,13 +22,16 @@ export default () => {
     password: args.password || process.env.DATABASE_PASSWORD,
     database: args.database || process.env.DATABASE_NAME,
     folder: args.folder ? resolve(process.cwd(), args.folder) : resolve(process.cwd(), './migrations'),
+    tableName: args.tableName || args['table-name'],
   };
 
   console.log('==> Running migration with config');
   console.log('   --> host: ', config.host);
   console.log('   --> port: ', config.port);
+  console.log('   --> user: ', config.user);
   console.log('   --> database: ', config.database);
   console.log('   --> folder: ', config.folder);
+  console.log('   --> table: ', config.tableName);
 
   migrate(config).then(() => {
     process.exit(0);

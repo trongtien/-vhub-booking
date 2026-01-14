@@ -1,8 +1,6 @@
 import type { Knex } from 'knex'
 
-export {
-  Knex
-}
+export type { Knex }
 
 export type ConnectionConfig = {
   client?: "pg" | "mysql" | "sqlite3"
@@ -24,4 +22,5 @@ export type MigrateConfig = {
   password: string;
   database: string;
   folder: string;
+  tableName?: string;
 };
