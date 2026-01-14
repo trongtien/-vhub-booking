@@ -12,7 +12,7 @@ export default function makeMigration(migrationName: string, migrationsFolder: s
   const filePath = resolve(migrationsFolder, fileName);
 
   const template = `
-import { Knex } from 'knex';
+import { Knex } from '@booking/serve-knex-cli';
 
 export async function up(knex: Knex): Promise<void> {
     console.log('==> Run migration ${migrationName}');
@@ -39,11 +39,11 @@ export async function down(knex: Knex): Promise<void> {
 
   try {
     writeFileSync(filePath, template, 'utf-8');
-    console.log(`✅ Created migration: ${fileName}`);
-    console.log(`📁 Location: ${filePath}`);
+    console.log(`==> Created migration: ${fileName}`);
+    console.log(`==> Location: ${filePath}`);
     return filePath;
   } catch (error) {
-    console.error('❌ Error creating migration file:', error);
+    console.error('==> Error creating migration file:', error);
     throw error;
   }
 }

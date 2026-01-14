@@ -40,3 +40,8 @@ export default () => {
     process.exit(1);
   });
 }
+
+// Execute when run as a script
+if (require.main === module) {
+  exports.default();
+}
