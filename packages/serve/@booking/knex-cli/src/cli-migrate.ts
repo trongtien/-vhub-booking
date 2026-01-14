@@ -25,17 +25,17 @@ export default () => {
     folder: args.folder ? resolve(process.cwd(), args.folder) : resolve(process.cwd(), './migrations'),
   };
 
-  console.log('==> Running migration with config:', {
-    host: config.host,
-    port: config.port,
-    database: config.database,
-    folder: config.folder,
-  });
+  console.log('==> Running migration with config');
+  console.log('   --> host: ', config.host);
+  console.log('   --> port: ', config.port);
+  console.log('   --> database: ', config.database);
+  console.log('   --> folder: ', config.folder);
 
   migrate(config).then(() => {
     process.exit(0);
   }).catch((error) => {
-    console.error('==> Migration failed:', error);
+    console.error('==> Migration failed:');
+    console.error('   --> ', error);
     process.exit(1);
   });
 }
