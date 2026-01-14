@@ -23,6 +23,7 @@
   "dependencies": {
     "@booking/serve-core": "workspace:*",
     "@booking/serve-knex-cli": "workspace:*",
+    "@booking/serve-master-data": "workspace:*",
     "@nestjs/common": "^11.1.11",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.1.11",

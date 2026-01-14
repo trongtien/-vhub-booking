@@ -1,5 +1,5 @@
 {
-  "name": "@booking/serve-master-data",
+  "name": "@booking/serve-legal-fiscal",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -13,8 +13,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "lint": "eslint . --max-warnings 0",
-    "migrate": "knex-cli-migrate --folder=./migrations --path-env=../../../../.env.local --table-name=knex_migrations_master_data",
-    "migrate:rollback": "knex-cli-rollback --folder=./migrations --path-env=../../../../.env.local --table-name=knex_migrations_master_data",
+    "migrate": "knex-cli-migrate --folder=./migrations --path-env=../../../../.env.local --table-name=knex_migrations_legal_fiscal",
+    "migrate:rollback": "knex-cli-rollback --folder=./migrations --path-env=../../../../.env.local --table-name=knex_migrations_legal_fiscal",
     "migrate:make": "knex-cli-make --path=./migrations",
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit",
@@ -24,7 +24,8 @@
   },
   "dependencies": {
     "@booking/serve-core": "workspace:*",
-    "@booking/serve-knex-cli": "workspace:*"
+    "@booking/serve-knex-cli": "workspace:*",
+    "knex": "^3.1.0"
   },
   "devDependencies": {
     "@booking/eslint-config": "workspace:*",

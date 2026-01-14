@@ -1,5 +1,5 @@
 {
-  "name": "@booking/public",
+  "name": "@booking/booking-mfe",
   "version": "0.0.0",
   "private": true,
   "exports": {

@@ -1,42 +1,20 @@
 import { Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TraceInterceptor } from './interceptor/trace.interceptor';
-import { LoggerAdapter } from '@booking/serve-core';
-import { registerConnection } from '@booking/serve-knex-cli';
 import { LogHttpInterceptor } from './interceptor/log-http.interceptor';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { APP_DATABASE_CONNECTION } from './utils/symbol-provider';
-import { appConfig, databaseConfig } from './utils/config';
 import { AppMasterDataModule } from './app-mater-data/app-master-data.module';
+import { DatabaseModule } from './database.module';
+import { LoggerModule } from './logger.module';
+import { ConfigEnvModule } from './config.module';
 
 @Module({
     imports: [
-        ConfigModule.forRoot({
-            isGlobal: true,
-            cache: true,
-            envFilePath: ['../../../.env.local', '.env.local'],
-            expandVariables: true,
-            ignoreEnvFile: false,
-            load: [appConfig, databaseConfig],
-        }),
+        ConfigEnvModule,
+        LoggerModule,
+        DatabaseModule,
         AppMasterDataModule
     ],
     providers: [
-        {
-            provide: LoggerAdapter,
-            useFactory: () => new LoggerAdapter(LoggerAdapter.TERMINAL_LOGGER),
-        },
-        {
-            provide: APP_DATABASE_CONNECTION,
-            inject: [ConfigService, LoggerAdapter],
-            useFactory: (config: ConfigService, logger: LoggerAdapter) => registerConnection({
-                database: config.get<string>('databaseConfig.database'),
-                host: config.get<string>('databaseConfig.host'),
-                port: config.get<number>('databaseConfig.port'),
-                user: config.get<string>('databaseConfig.user'),
-                password: config.get<string>('databaseConfig.password'),
-            }, logger),
-        },
         {
             provide: APP_INTERCEPTOR,
             useClass: TraceInterceptor,
