@@ -1,9 +1,10 @@
 import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { Debug } from './debug-console';
 
 export default function makeMigration(migrationName: string, migrationsFolder: string) {
   if (!migrationName) {
-    console.error('❌ Error: Migration name is required');
+    Debug.Error('==> Error: Migration name is required');
     return;
   }
 
@@ -42,11 +43,12 @@ export async function down(knex: Knex): Promise<void> {
 
   try {
     writeFileSync(filePath, template, 'utf-8');
-    console.log(`==> Created migration: ${fileName}`);
-    console.log(`==> Location: ${filePath}`);
+    Debug.Log(`==> Created migration: ${fileName}`);
+    Debug.Log(`==> Location: ${filePath}`);
     return filePath;
   } catch (error) {
-    console.error('==> Error creating migration file:', error);
+    Debug.Error('==> Error creating migration file:');
+    Debug.Error(`    --> ${error}`);
     throw error;
   }
 }

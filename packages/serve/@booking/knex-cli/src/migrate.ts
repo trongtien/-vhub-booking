@@ -3,6 +3,7 @@ import { registerConfig } from "./register-config";
 import { validateConfig } from "./validate-config";
 
 import type { MigrateConfig } from "./type";
+import { Debug } from "./debug-console";
 
 export default async function migrate(config: Partial<MigrateConfig>) {
   await validateConfig(config);
@@ -14,16 +15,17 @@ export default async function migrate(config: Partial<MigrateConfig>) {
 
   try {
     const [batch, migrations] = await dbClient.migrate.latest();
-    console.log("==> Migrate database success");
+    Debug.Log("==> Migrate database success");
 
-    console.log("    --> Database migration completed batch", batch);
-    console.log("    --> Database migration completed migrations");
+    Debug.Log(`    --> Database migration completed batch ${batch}`);
+    Debug.Log(`    --> Database migration completed migrations`);
     for (const migration of migrations) {
-      console.log("       --> ", migration);
+      Debug.Log(`       --> ${migration}`);
     }
   } catch (error) {
-    console.error("==> Migrate error config", error);
+    Debug.Error(`==> Migrate error config ${error}`);
   } finally {
+    Debug.Log(`==> Database destroy`);
     dbClient.destroy();
   }
 }

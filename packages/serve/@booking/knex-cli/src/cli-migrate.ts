@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 
 import type { MigrateConfig } from "./type";
 import migrate from "./migrate";
+import { Debug } from "./debug-console";
 
 export default () => {
   if (require.main !== module) return;
@@ -25,19 +26,19 @@ export default () => {
     tableName: args.tableName || args['table-name'],
   };
 
-  console.log('==> Running migration with config');
-  console.log('   --> host: ', config.host);
-  console.log('   --> port: ', config.port);
-  console.log('   --> user: ', config.user);
-  console.log('   --> database: ', config.database);
-  console.log('   --> folder: ', config.folder);
-  console.log('   --> table: ', config.tableName);
+  Debug.Log('==> Running migration with config');
+  Debug.Log(`   --> host: ${config.host} `);
+  Debug.Log(`   --> port: ${config.port} `);
+  Debug.Log(`   --> user: ${config.user} `);
+  Debug.Log(`   --> database: ${config.database} `);
+  Debug.Log(`   --> folder: ${config.folder} `);
+  Debug.Log(`   --> table: ${config.tableName} `);
 
   migrate(config).then(() => {
     process.exit(0);
   }).catch((error) => {
-    console.error('==> Migration failed:');
-    console.error('   --> ', error);
+    Debug.Error('==> Migration failed:');
+    Debug.Error(`   --> ${error}`);
     process.exit(1);
   });
 }

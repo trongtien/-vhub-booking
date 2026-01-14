@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 
 import type { MigrateConfig } from "./type";
 import rollback from "./rollback";
+import { Debug } from "./debug-console";
 
 export default () => {
   if (require.main !== module) return;
@@ -27,17 +28,19 @@ export default () => {
     tableName: args.tableName || args['table-name'],
   };
 
-  console.log('==> Running rollback with config:', {
-    host: config.host,
-    port: config.port,
-    database: config.database,
-    folder: config.folder,
-  });
+  Debug.Log('==> Running rollback with config');
+  Debug.Log(`   --> host: ${config.host} `);
+  Debug.Log(`   --> port: ${config.port} `);
+  Debug.Log(`   --> user: ${config.user} `);
+  Debug.Log(`   --> database: ${config.database} `);
+  Debug.Log(`   --> folder: ${config.folder} `);
+  Debug.Log(`   --> table: ${config.tableName} `);
 
   rollback(config).then(() => {
     process.exit(0);
   }).catch((error) => {
-    console.error('==> Rollback failed:', error);
+    Debug.Error(`==> Rollback failed:`);
+    Debug.Error(`    --> ${error}`);
     process.exit(1);
   });
 }
