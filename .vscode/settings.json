@@ -24,5 +24,19 @@
   },
   "cSpell.ignorePaths": [
     ".devcontainer/**"
+  ],
+  "sqltools.connections": [
+    {
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "askForPassword": true,
+      "driver": "PostgreSQL",
+      "name": "dev-vhub",
+      "group": "Vhub",
+      "database": "vhub_booking",
+      "username": "vhub_user"
+    }
   ]
 }

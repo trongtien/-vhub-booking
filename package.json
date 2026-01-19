@@ -5,7 +5,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "dev:fe": "turbo run dev --filter=@booking/shell",
-    "dev:be": "turbo run dev --filter=@booking/serve-main --filter=@booking/serve-core",
+    "dev:be": "turbo run dev --filter=@booking/serve-main",
     "dev:sever-main": "turbo run dev --filter=@booking/serve-main",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
