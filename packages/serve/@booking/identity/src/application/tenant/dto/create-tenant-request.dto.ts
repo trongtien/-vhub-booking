@@ -12,11 +12,11 @@ export interface ICreateTenantUseCase {
 
 class CreateTenantDTO extends CommonDTO<ICreateTenantUseCase> {
     schema = z.object({
-        businessName: z.string().min(1),
-        taxCode: z.string().min(1),
-        subscriptionPlan: z.string().min(1),
-        dbSchemaName: z.string().min(1),
-        status: z.string().min(1),
+        businessName: z.string().min(1, "error.required"),
+        taxCode: z.string().min(1, "error.required"),
+        subscriptionPlan: z.string().min(1, "error.required"),
+        dbSchemaName: z.string().min(1, "error.required"),
+        status: z.string().min(1, "error.required"),
     });
 
 

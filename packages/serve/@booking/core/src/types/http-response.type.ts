@@ -2,7 +2,7 @@ export type ResponseMeta = {
     requestId: string;
     traceId?: string;
     tenantId?: string;
-    version: string;
+    apiVersion: string;
     timestamp: string;
 };
 

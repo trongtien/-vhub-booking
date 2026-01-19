@@ -1,32 +1,26 @@
 import z from "zod";
 import type { TErrorResponse } from "../types";
-import { HttpResponse, ServeError } from "../helpers";
+import { ValidationError } from "../helpers";
 
 export abstract class CommonDTO<T> {
     abstract schema: z.ZodTypeAny;
 
     validate(value: z.infer<typeof this.schema>) {
-        const result = this.schema.parse(value)
-        return result
+        const result = this.schema.parse(value);
+        return result;
     }
 
-    throwValidationError(zodError: z.ZodError) {
-        const errors = zodError.issues.map((err: z.ZodIssue) => {
-            const field = err.path.join('.') || 'root';
+    throwValidationError(zodError: z.ZodError): never {
+        const errors = zodError.issues.map((i: z.ZodIssue) => {
             return {
-                field,
-                message: err.message
+                field: i.path.join("."),
+                code: i.code,
+                message: i.message,
             };
         });
 
-        return HttpResponse.error({
-            code: 'VALIDATION_ERROR',
-            publicMessage: 'Validation error',
-            details: errors,
-            httpStatus: 400,
-            category: 'VALIDATION',
-        })
+        throw new ValidationError("error.validation_failed", errors);
     }
 
-    abstract fromUseCase(value: z.infer<typeof this.schema>): T
+    abstract fromUseCase(value: z.infer<typeof this.schema>): T;
 }

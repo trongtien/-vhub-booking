@@ -6,6 +6,7 @@ import type { ResponseMeta } from "../types/http-response.type";
 class HttpResponseCommon<T> {
   constructor(
     readonly success: boolean,
+    readonly http_status: number,
     readonly data: T | null,
     readonly error: null | {
       code: string;
@@ -18,16 +19,19 @@ class HttpResponseCommon<T> {
 
 export class HttpResponse {
   static success<T>(data: T | null): HttpResponseCommon<T> {
-    return new HttpResponseCommon(true, data, null, HttpResponse.getCtxMeta());
+    return new HttpResponseCommon(true, 200, data, null, HttpResponse.getCtxMeta());
   }
 
   static error(error: ServeError | {
     code: string;
     publicMessage: string;
     details?: unknown;
+    httpStatus?: number;
   }): HttpResponseCommon<null> {
+    const httpStatus = ('httpStatus' in error && error.httpStatus) ? error.httpStatus : 500;
     return new HttpResponseCommon(
       false,
+      httpStatus,
       null,
       {
         code: error.code,
@@ -46,10 +50,19 @@ export class HttpResponse {
   }
 
   private static getCtxMeta(): ResponseMeta {
-    const ctx = RequestContext.current();
-    return {
-      ...ctx,
-      timestamp: new Date().toISOString(),
-    };
+    try {
+      const ctx = RequestContext.current();
+      return {
+        ...ctx,
+        timestamp: new Date().toISOString(),
+      };
+    } catch {
+      // Fallback when context is not available (e.g., during early bootstrap errors)
+      return {
+        requestId: 'unknown',
+        apiVersion: 'v1',
+        timestamp: new Date().toISOString(),
+      };
+    }
   }
 }
