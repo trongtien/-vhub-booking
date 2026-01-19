@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
 import { HttpFilterError } from './filter/http-error.filter';
 import { FastifyConfigApp } from './utils/fastify-config';
-
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
@@ -15,6 +15,17 @@ async function bootstrap() {
     const config = app.get(ConfigService)
     const appPort = config.get<number>('app.port') || 3001
     const appHost = config.get<string>('app.host') || '0.0.0.0'
+
+    // Swagger configuration
+    const swaggerConfig = new DocumentBuilder()
+        .setTitle('VHub Booking API')
+        .setDescription('The VHub Booking API documentation')
+        .setVersion('1.0')
+        .addTag('tenants')
+        .build();
+    
+    const document = SwaggerModule.createDocument(app, swaggerConfig);
+    SwaggerModule.setup('api', app, document);
 
     app.enableShutdownHooks();
     app.enableCors();

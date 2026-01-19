@@ -1,5 +1,0 @@
-export * from './infra/province/database/province.repository'
-export * from './application/province/dto/province.response'
-export * from './application/province/use-case/get-province.use-case'
-export * from './domain/province/province.entity'
-export * from './domain/province/province.repository'

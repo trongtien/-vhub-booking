@@ -16,6 +16,9 @@ export * from "./types/http-response.type";
 export * from "./types/logger.type";
 export * from "./types/repositories-query.type";
 
+// domain
+export * from "./domain/entity.base";
+
 // infra
 export * from "./infra/cache/redis.cache";
 export * from "./infra/config/app.config";
