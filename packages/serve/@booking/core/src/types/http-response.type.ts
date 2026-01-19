@@ -5,3 +5,9 @@ export type ResponseMeta = {
     version: string;
     timestamp: string;
 };
+
+
+export type TErrorResponse = {
+    field: string;
+    message: string;
+};

@@ -10,6 +10,8 @@ export * from "./helpers/logger.helper";
 export * from "./helpers/result.helper";
 export * from "./helpers/path.helper";
 
+export * from './applications/index'
+
 // types
 export * from "./types/context-request.type";
 export * from "./types/http-response.type";

@@ -21,7 +21,11 @@ export class HttpResponse {
     return new HttpResponseCommon(true, data, null, HttpResponse.getCtxMeta());
   }
 
-  static error(error: ServeError): HttpResponseCommon<null> {
+  static error(error: ServeError | {
+    code: string;
+    publicMessage: string;
+    details?: unknown;
+  }): HttpResponseCommon<null> {
     return new HttpResponseCommon(
       false,
       null,

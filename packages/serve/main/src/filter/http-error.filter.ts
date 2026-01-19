@@ -3,15 +3,23 @@ import { ServeError } from '@booking/serve-core';
 
 @Catch()
 export class HttpFilterError implements ExceptionFilter {
-  catch(error: Record<string, string | number>, host: ArgumentsHost) {
+  catch(error: Error | ServeError, host: ArgumentsHost) {
+    console.error('==> HttpFilterError caught:', {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+      isServeError: error instanceof ServeError,
+    });
+    
     const reply = host.switchToHttp().getResponse();
     if (error instanceof ServeError) {
       return reply.status(error.httpStatus).send({
         success: false,
         error: {
           code: error.code,
-          message: error.message,
-          traceId: error.traceId,
+          message: error.publicMessage || error.message,
+          internalMessage: error.internalMessage,
+          name: error.name,
         },
       });
     }
@@ -20,7 +28,8 @@ export class HttpFilterError implements ExceptionFilter {
       success: false,
       error: {
         code: 'INTERNAL_SERVER_ERROR',
-        message: 'internal.error',
+        message: error.message || 'internal.error',
+        name: error.name || 'Error',
       },
     });
   }

@@ -5,7 +5,6 @@ import { HttpFilterError } from './filter/http-error.filter';
 import { FastifyConfigApp } from './utils/fastify-config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
-import { HttpResponse } from '@booking/serve-core';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestFastifyApplication>(
@@ -33,20 +32,6 @@ async function bootstrap() {
     app.enableShutdownHooks();
     app.enableCors();
     app.useGlobalFilters(new HttpFilterError());
-
-    // 404 Not Found handler
-    const fastifyInstance = app.getHttpAdapter().getInstance();
-    fastifyInstance.setNotFoundHandler((request, reply) => {
-        return HttpResponse.error({
-            category: 'AUTH',
-            code: 'ROUTE_NOT_FOUND',
-            httpStatus: 404,
-            internalMessage: `Route ${request.method}:${request.url} not found`,
-            publicMessage: `Route ${request.method}:${request.url} not found`,
-            name: 'RouteNotFoundError',
-            message: `Route ${request.method}:${request.url} not found`,
-        })
-    });
 
     await app.listen(appPort, appHost);
 }

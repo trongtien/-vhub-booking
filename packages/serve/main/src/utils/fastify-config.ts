@@ -6,6 +6,7 @@ export class FastifyConfigApp extends FastifyAdapter {
     super({
       logger: true,
       genReqId: () => uuid(),
+      bodyLimit: 10485760, // 10MB
     });
   }
 }

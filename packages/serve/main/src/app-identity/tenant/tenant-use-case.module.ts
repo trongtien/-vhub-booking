@@ -3,15 +3,17 @@ import { TENANT_REPOSITORY } from "../../utils/symbol-provider";
 import { TenantInfraRepoModule } from "./tenant-infra-repo.module";
 
 import { CreateTenantUseCase, GetTenantByIdUseCase } from '@booking/serve-identity'
+import { LoggerAdapter } from "@booking/serve-core";
+import { LoggerModule } from "../../logger.module";
 
 
 @Module({
-    imports: [TenantInfraRepoModule],
+    imports: [TenantInfraRepoModule, LoggerModule],
     providers: [
         {
             provide: CreateTenantUseCase,
-            inject: [TENANT_REPOSITORY],
-            useFactory: (provinceRepo) => new CreateTenantUseCase(provinceRepo),
+            inject: [LoggerAdapter, TENANT_REPOSITORY],
+            useFactory: (logger, provinceRepo) => new CreateTenantUseCase(logger, provinceRepo),
         }
     ],
     exports: [CreateTenantUseCase],
