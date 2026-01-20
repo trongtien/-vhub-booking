@@ -1,5 +1,8 @@
 packages:
-  - "packages/*"
-  - "packages/fe/**"
-  - "packages/serve/**"
-  - "packages/@booking/*"
+  - "config/*"
+  - "frontend/**"
+
+  # - "packages/*"
+  # - "packages/fe/**"
+  # - "packages/serve/**"
+  # - "packages/@booking/*"

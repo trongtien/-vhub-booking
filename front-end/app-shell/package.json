@@ -1,0 +1,24 @@
+{
+  "name": "@fe/app-shell",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint --max-warnings 0",
+    "check-types": "next typegen && tsc --noEmit"
+  },
+  "dependencies": {
+    "@fe/app-core": "workspace:*",
+    "next": "16.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@config/tailwind-config": "workspace:*",
+    "@config/eslint-config": "workspace:*",
+    "@config/typescript-config": "workspace:*"
+  }
+}

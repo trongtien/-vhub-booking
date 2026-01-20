@@ -1,0 +1,17 @@
+{
+  "name": "@config/jest-config",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./register-jest": {
+      "types": "./register-jest.d.ts",
+      "default": "./register-jest.js"
+    }
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-extended": "^4.0.2",
+    "ts-jest": "^29.1.2"
+  }
+}
