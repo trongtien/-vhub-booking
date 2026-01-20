@@ -17,10 +17,12 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@config/tailwind-config": "workspace:*",
     "@config/eslint-config": "workspace:*",
     "@config/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "^4.1.18",
+    "@types/node": "^22.15.3",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
     "tailwindcss": "^4.1.18"
   }
 }

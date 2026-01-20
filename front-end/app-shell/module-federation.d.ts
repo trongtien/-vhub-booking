@@ -1,8 +1,3 @@
-declare module '*.css' {
-  const content: Record<string, string>;
-  export default content;
-}
-
 declare module 'shellAdmin/App' {
   const App: React.ComponentType;
   export default App;
@@ -25,8 +20,3 @@ declare global {
 }
 
 export {};
-
-declare module '*.css?inline' {
-  const content: string;
-  export default content;
-}

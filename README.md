@@ -1,135 +1,206 @@
-# Turborepo starter
+# VHub Booking - Microfrontend Platform
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern microfrontend architecture built with **Turbo Repo**, **Next.js**, **React**, and **Module Federation**.
 
-## Using this example
+## 🏗️ Architecture Overview
 
-Run the following command:
+This project implements a **Module Federation** microfrontend setup with:
 
-```sh
-npx create-turbo@latest
-```
+- **app-shell** (Next.js 16) - Host application that orchestrates and loads microfrontends
+- **shell-admin** (React + Webpack) - Admin portal microfrontend
+- **order** (React + Webpack) - Order management microfrontend
+- **app-core** - Shared React component library
 
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+## 📁 Project Structure
 
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+vhub-booking/
+├── front-end/
+│   ├── app-shell/           # Next.js host app (port 3000)
+│   │   ├── app/
+│   │   │   ├── page.tsx     # Landing page
+│   │   │   ├── order/       # Order microfrontend route
+│   │   │   └── shell-admin/ # Admin microfrontend route
+│   │   └── next.config.js   # Module Federation config
+│   ├── shell-admin/         # Admin React app (port 3001)
+│   │   ├── src/
+│   │   │   ├── App.tsx
+│   │   │   ├── pages/
+│   │   │   └── components/
+│   │   └── webpack.config.js
+│   ├── order/               # Order React app (port 3002)
+│   │   ├── src/
+│   │   │   ├── App.tsx
+│   │   │   ├── pages/
+│   │   │   └── components/
+│   │   └── webpack.config.js
+│   └── app-core/            # Shared components
+├── config/                  # Shared configs (ESLint, TS, Jest)
+├── turbo.json              # Turbo Repo configuration
+└── package.json
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## 🚀 Getting Started
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+### Prerequisites
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+- **Node.js**: >= 18
+- **pnpm**: 9.0.0
 
-### Develop
+### Installation
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+```bash
+# Install dependencies
+pnpm install
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+### Development
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
+Run all apps in development mode:
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+```bash
+pnpm dev
 ```
 
-### Remote Caching
+Or run individual apps:
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+```bash
+# Run only the host app (requires remotes to be running)
+pnpm dev:fe
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+# Or run in separate terminals:
+cd front-end/app-shell && pnpm dev      # Port 3000
+cd front-end/shell-admin && pnpm dev    # Port 3001
+cd front-end/order && pnpm dev          # Port 3002
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### Access the Applications
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+- **Host App**: http://localhost:3000
+- **Order Management**: http://localhost:3000/order
+- **Admin Portal**: http://localhost:3000/shell-admin
 
+#### Standalone Microfrontends (Dev Mode)
+
+- **Shell Admin**: http://localhost:3001
+- **Order**: http://localhost:3002
+
+## 📦 Module Federation Configuration
+
+### Host (app-shell)
+
+```javascript
+remotes: {
+  shellAdmin: 'shellAdmin@http://localhost:3001/remoteEntry.js',
+  order: 'order@http://localhost:3002/remoteEntry.js',
+}
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+### Remote Apps (shell-admin & order)
+
+Each microfrontend exposes its main App component:
+
+```javascript
+exposes: {
+  './App': './src/App.tsx',
+}
 ```
 
-## Useful Links
+## 🛠️ Build
 
-Learn more about the power of Turborepo:
+```bash
+# Build all applications
+pnpm build
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+# Build specific app
+cd front-end/app-shell && pnpm build
+```
+
+## 📝 Available Scripts
+
+- `pnpm dev` - Start all apps in development mode
+- `pnpm build` - Build all applications for production
+- `pnpm lint` - Lint all packages
+- `pnpm check-types` - Type check all packages
+- `pnpm format` - Format code with Prettier
+
+## 🎯 Features
+
+### Order Management Microfrontend
+- Order list with filtering
+- Order details view
+- Create new orders
+- Status management
+
+### Admin Portal Microfrontend
+- Admin dashboard with metrics
+- User management
+- Settings configuration
+- Role-based views
+
+### Host Application
+- Route-based microfrontend loading
+- Dynamic remote loading
+- Error boundary handling
+- Fallback UI for loading states
+
+## 🔧 Technology Stack
+
+- **Build System**: Turbo Repo
+- **Host App**: Next.js 16 (App Router)
+- **Microfrontends**: React 19, Webpack 5
+- **Module Federation**: @module-federation/nextjs-mf & @module-federation/enhanced
+- **Styling**: Tailwind CSS
+- **Routing**: Next.js App Router (host), React Router (remotes)
+- **Type Safety**: TypeScript 5.9
+- **Package Manager**: pnpm
+
+## 🔐 Shared Dependencies
+
+All apps share singleton instances of:
+- `react` (^19.2.0)
+- `react-dom` (^19.2.0)
+- `react-router-dom` (shared in remotes)
+
+## 📚 Adding New Microfrontends
+
+1. Create a new React app in `front-end/`
+2. Configure Webpack with Module Federation
+3. Expose components via `exposes` field
+4. Add remote reference in `app-shell/next.config.js`
+5. Create route in `app-shell/app/`
+6. Update `microfrontends.json`
+
+## 🐛 Troubleshooting
+
+### Microfrontend Not Loading
+
+1. Ensure all apps are running (host + remotes)
+2. Check browser console for Module Federation errors
+3. Verify remote URLs in `next.config.js`
+4. Clear `.next` cache: `rm -rf .next`
+
+### Type Errors
+
+```bash
+pnpm check-types
+```
+
+### Build Errors
+
+```bash
+# Clean all builds
+pnpm clean
+
+# Reinstall dependencies
+rm -rf node_modules
+pnpm install
+```
+
+## 📄 License
+
+Private project
+
+## 👥 Team
+
+VHub Development Team
