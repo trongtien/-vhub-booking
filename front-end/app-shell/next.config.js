@@ -19,17 +19,12 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        // Khi gõ localhost:3000/order -> nó sẽ gọi localhost:3002/order/
-        source: "/order",
-        destination: "http://localhost:3002/order/",
+        source: "/pos",
+        destination: "http://localhost:3002/pos/",
       },
       {
-        source: "/order/:path*",
-        destination: "http://localhost:3002/order/:path*",
-      },
-      {
-        source: "/@vite/:path*",
-        destination: "http://localhost:3002/@vite/:path*",
+        source: "/pos/:path*",
+        destination: "http://localhost:3002/pos/:path*",
       },
     ];
   },

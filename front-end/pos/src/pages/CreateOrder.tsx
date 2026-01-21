@@ -174,7 +174,7 @@ const CreateOrder: React.FC = () => {
           </button>
           <button 
             type="button"
-            onClick={() => navigate('/order/list')}
+            onClick={() => navigate('/pos/list')}
             style={{ 
               background: '#e5e7eb', 
               color: '#374151', 

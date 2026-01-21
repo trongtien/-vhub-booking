@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Order Management</h1>
           <nav>
-            <Link to="/order/list" style={{ 
+            <Link to="/pos/list" style={{ 
               color: 'white', 
               textDecoration: 'none', 
               marginRight: '1.5rem',
@@ -25,7 +25,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             }}>
               Orders
             </Link>
-            <Link to="/order/create" style={{ 
+            <Link to="/pos/create" style={{ 
               color: 'white', 
               textDecoration: 'none',
               fontWeight: '500'

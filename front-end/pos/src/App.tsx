@@ -22,7 +22,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <BrowserRouter basename="/order">
+    <BrowserRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<Navigate to="/list" replace />} />

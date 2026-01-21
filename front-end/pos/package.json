@@ -1,8 +1,9 @@
 {
-  "name": "@fe/order",
+  "name": "@fe/pos",
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "dev:local": "vite --port 3002",
     "dev": "vite --port 3002",
     "build": "vite build",
     "preview": "vite preview --port 3002",

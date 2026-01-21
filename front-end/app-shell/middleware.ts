@@ -5,9 +5,9 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get('auth-token')?.value;
   const { pathname } = request.nextUrl;
 
-  if (pathname.startsWith('/order')) {
+  if (pathname.startsWith('/pos')) {
     if (!token) {
-      const loginUrl = new URL('/login', request.url);
+      const loginUrl = new URL('/pos', request.url);
       loginUrl.searchParams.set('redirect', pathname);
       return NextResponse.redirect(loginUrl);
     }
@@ -17,5 +17,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/order/:path*'],
+  matcher: ['/pos/:path*'],
 };
