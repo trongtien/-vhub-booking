@@ -1,3 +1,5 @@
-import postCssConfig from "@config/tailwind-config/postcss.base";
-
-export default postCssConfig;
+export default {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+};

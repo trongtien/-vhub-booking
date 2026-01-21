@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3000",
+    "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "lint": "eslint --max-warnings 0",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@fe/app-core": "workspace:*",
+    "cross-env": "^7.0.3",
     "next": "16.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
